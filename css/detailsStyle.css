@@ -1,0 +1,43 @@
+.imgDiv{
+	background-color: aliceblue;
+}
+
+.descMovie{
+	padding: 20px;
+	text-align: left;
+}
+
+.descMovie h1{
+	padding-bottom: 15px;
+}
+
+.descMovie h4{
+	line-height: 2.5rem;
+}
+
+.otherDetails{
+	text-align: left;
+	padding: 20px;
+	line-height: 2.5 rem;
+	display: inline-block;
+	width: 100%;
+}
+
+.otherDetails div{
+	display: inline-block;
+	width: 50%;
+	float: left;
+}
+
+@media screen and (max-width: 480px) {
+  				.descMovie{
+					padding: 4vw;
+	
+				}
+
+
+				.otherDetails{		
+				padding: 4vw;	
+				}
+
+}
