@@ -1,25 +1,24 @@
-var showId = window.location.search.split('=')[1];
+let showId = window.location.search.split('=')[1];
 const url = `http://api.tvmaze.com/shows/${showId}`;
 async function getapi(url) {
-    const response = await fetch(url);
-    var data = await response.json();
+	try{
+	showLoader();
+	const response = await fetch(url);
+    let data = await response.json();
     console.log(data);
     if (response.status === 200) {
-        var myHtml = '';
+        let myHtml = '';
         myHtml += `
 							<div class="movieWrapper">
 								<div class="resWrapper">
 									<div class="abtMovie">
-
 										<div class="imgDiv">
-											<img src=${data.image?.medium} alt="" loading="lazy"/>
+											<img src=${data.image?.medium??'images/image-not-found.jpg'} alt="" loading="lazy"/>
 										</div>
-
 										<div class="descMovie">
 													<h1>${data.name}</h1>
-													<h4>${data.summary}</h3>
-										</div>
-										
+													<h4>${data.summary?data.summary:'No summary available'}</h4>
+										</div>							
 
 									</div>
 									<div>
@@ -37,13 +36,31 @@ async function getapi(url) {
 							</div>
 
 						`;
+						 document.getElementById('detailsSection').innerHTML = myHtml;
 
     }
+    else{
+    	document.getElementById('detailsSection').innerHTML =`<h1 class="error-text">Something went wrong</h1>`;
+    }
+   		hideLoader();
+	}
+	catch(err){
+		hideLoader();
+		document.getElementById('detailsSection').innerHTML = `<h1 class="error-text">${err.message}</h1>`;
+	}
 
-    document.getElementById('detailsSection').innerHTML = myHtml;
 
 
 }
 
+function hideLoader() {
+    if (document.getElementById('loading'))
+        document.getElementById('loading').style.display = 'none';
+}
+
+function showLoader() {
+    if (document.getElementById('loading'))
+        document.getElementById('loading').style.display = 'flex';
+}
 
 getapi(url);
