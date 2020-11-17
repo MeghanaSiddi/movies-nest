@@ -39,18 +39,19 @@ async function getapi(url) {
             }
 
             else {
-                document.getElementById('resultsDiv').innerHTML = `<h1>No results found</h1>`;
+                document.getElementById('resultsDiv').innerHTML = `<h1 class="error-text">No results found</h1>`;
             }
 
 
         }
         else {
-            document.getElementById('resultsDiv').innerHTML = `<h1>Something went wrong</h1>`;
+            document.getElementById('resultsDiv').innerHTML = `<h1 class="error-text">Something went wrong</h1>`;
         }
+        hideLoader();
     }
     catch (err) {
         hideLoader();
-        document.getElementById('resultsDiv').innerHTML = `<h1>${err.message}</h1>`;
+        document.getElementById('resultsDiv').innerHTML = `<h1 class="error-text">${err.message}</h1>`;
     }
 }
 getapi(api_url);
@@ -70,7 +71,7 @@ function showPopularShows(data) {
     for (var i = 0; i < data.length; i++) {
         myHtml += `<li class="" data-target="#myCarousel" data-slide-to=${i}></li>`;
         newHTml += `<div class="item">
-         				<a href=detailsPage.html?id=${data[i].id} target="_blank"><img src=${data[i].image.medium} alt=${data[i].name} style="width:100%;" loading="lazy" onclick="LeftClick(event)"</a>
+         				<a href=detailsPage.html?id=${data[i].id} target="_self"><img src=${data[i].image.medium??'images/image-not-found.jpg'} alt=${data[i].name} style="width:50%;" loading="lazy" onclick="LeftClick(event)"/><div style="display:inline-block;width:50%;float:right;" class="slidesText"><h1>${data[i].name}</h1><h4>Rating: ${data[i].rating.average}</h4></div></a>
      				 </div>`;
 
     }
@@ -94,17 +95,17 @@ function ShowAllMoviesByGenres(data) {
             myHtml += `<li class="item">
 				  	<div class="box">
 					<div class="slide-img">
-						<img src=${v.image.medium} alt=${v.name} loading="lazy">
+						<img src=${v.image.medium??'images/image-not-found.jpg'} alt=${v.name} loading="lazy">
 						<div class="overlay">
-							<a href=detailsPage.html?id=${v.id} class="view-btn" target="_blank">View Details</a>
+							<a href=detailsPage.html?id=${v.id} class="view-btn" target="_self">View Details</a>
 						</div>
 					</div>
 					<div class="detail-box">
 						<div class="type">
-							<a href="#">${v.name}</a>
+							<b href="#">${v.name}</b>
 							<span>${v.language}</span>
 						</div>
-						<span class="price">${v.rating?.average ?? 'No ratings'}</span>
+						<span class="rating">${v.rating?.average ?? 'No ratings'}</span>
 					</div>
 					</div>
 				  </li>`;
@@ -151,13 +152,13 @@ function searchShows(event) {
             if (response.status === 200) {
                 hideLoader();
                 if (data.length > 0) {
-                    let myHtml = '';
+                    let myHtml = '<h1>Results</h1>';
                     data.forEach(function (v, i) {
                         myHtml += `<div class="box resBox">
 					<div class="slide-img">
-						<img src=${v.show?.image?.medium} alt="" loading="lazy"/>
+						<img src=${v.show?.image?.medium??'images/image-not-found.jpg'} alt="" loading="lazy"/>
 						<div class="overlay">
-							<a href=detailsPage.html?id=${v.show.id} class="view-btn" target="_blank">View Details</a>
+							<a href=detailsPage.html?id=${v.show.id} class="view-btn" target="_self">View Details</a>
 						</div>
 					</div>
 					<div class="detail-box">
@@ -165,7 +166,7 @@ function searchShows(event) {
 							<a href="#">${v.show?.name}</a>
 							<span>${v.show?.language}</span>
 						</div>
-						<span class="price">${v.show.rating?.average ?? 'No ratings'}</span>
+						<span class="rating">${v.show.rating?.average ?? 'No ratings'}</span>
 					</div>
 					</div>`;
                     });
@@ -175,16 +176,16 @@ function searchShows(event) {
                 }
 
                 else {
-                    document.getElementById('resultsDiv').innerHTML = `<h1>No results found</h1>`;
+                    document.getElementById('resultsDiv').innerHTML = `<h1 class="error-text">No results found</h1>`;
                 }
             }
             else {
-                document.getElementById('resultsDiv').innerHTML = `<h1>Something Went Wrong</h1>`;
+                document.getElementById('resultsDiv').innerHTML = `<h1 class="error-text">Something Went Wrong</h1>`;
             }
         }
         catch (err) {
             hideLoader();
-            document.getElementById('resultsDiv').innerHTML = `<h1>${err.message}</h1>`;
+            document.getElementById('resultsDiv').innerHTML = `<h1 class="error-text">${err.message}</h1>`;
         }
     }
 
