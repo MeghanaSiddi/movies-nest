@@ -1,7 +1,6 @@
 		body{
 				margin: 0px;
-				padding:0px;
-				/*background-image: url('https://www.pexels.com/photo/background-backlight-blur-color-262713/');*/
+				padding:0px;				
 			}
 			a,a:hover{
 				text-decoration: none;
@@ -32,9 +31,6 @@
 			ul li{
 				list-style-type: none;
 			}
-			#popularShows ol li{
-				
-			}
 			#popularSlides{
 				height:50vh;
 			}
@@ -43,6 +39,16 @@
 					/*display: inline-block;
 					width:100%;*/
 				}
+
+				#popularSlides .item a{
+					height: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width:100%;
+					cursor: pointer;
+				}
+
 			#popularSlides .item img{
 				height:100%;
 				object-fit: contain;
@@ -58,6 +64,7 @@
 				max-height: 45vh;
 				transition: transform 1s ease;
 				overflow-y: hidden;
+				text-align: left;
 				/*position: absolute;
 				left:50%;
 				top:50%;
@@ -101,12 +108,13 @@
 			.text span{
 				color: rgba(26,26,26,0.5);
 			}
-			.price{
+			.rating{
 				color: #333333;
 				font-weight: 600;
 				font-size: 1rem;
 				font-family: poppins;
 				letter-spacing: 0.5px;
+				font-size: 1.25rem;
 			}
 			.overlay{
 				position: absolute;
@@ -257,6 +265,14 @@
  			    animation: spin 2s linear infinite;
 			}
 
+			.slidesText h1{
+				padding-bottom: 2vh;
+			}
+
+			.error-text{
+				margin-top: 40vh;
+			}
+
 			@keyframes spin {
   				0% { transform: rotate(0deg); }
   				100% { transform: rotate(360deg); }
@@ -271,7 +287,8 @@
 			@media screen and (max-width: 480px) {
   				.box{
   					width: 60vw;
-  					height: 42vh;
+  					height: auto;
+  					/*height: 42vh;*/
   				}
   				.magnifier{
   					display: block;
